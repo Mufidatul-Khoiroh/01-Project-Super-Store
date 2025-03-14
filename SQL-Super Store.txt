@@ -1,0 +1,54 @@
+-- Loading Data
+create table `dqlabmufi.portfolio01.superstore` as
+select *
+from `dqlab-da-bima.batch15.superstore`;
+
+-- Overview Total Order, Quantity, Sales, and Profit
+select
+     extract(year from order_date) as Year,
+      count(Order_ID) as Total_Order,
+      sum(Quantity) as Total_Quantity,
+      round(sum (sales),2) as Total_Sales, 
+      round(sum(profit),2) as Total_Profit
+from `dqlabmufi.portfolio01.superstore` 
+group by year;
+
+-- Top 10 Most Profitable Products
+select
+     Product_Name,
+     Category,
+     round(sum (profit),2) as Total_Profit
+from `dqlab-sesi02-mufi.latihan.superstore`
+group by Product_Name, Category
+order by Total_Profit desc
+limit 10;
+
+-- Top 10 Best-Selling Products based on Quantity
+select
+     Product_Name,
+     Category,
+     sum (Quantity) as Total_Quantity
+from `dqlabmufi.portfolio01.superstore`
+group by Product_Name, Category
+order by Total_Quantity desc
+limit 10;
+
+-- Annual comparison of total sales and profit for office supplies
+select
+     extract(year from order_date) as year,
+     round(sum (sales),2) as Total_Sales, 
+     round(sum(profit),2) as Total_Profit,
+from `dqlabmufi.portfolio01.superstore`
+where category='Office Supplies'
+group by year
+order by year;
+
+-- Annual comparison of total sales and profit for Technology
+select
+     extract(year from order_date) as year,
+     round(sum (sales),2) as Total_Sales, 
+     round(sum(profit),2) as Total_Profit,
+from `dqlabmufi.portfolio01.superstore`
+where category='Technology'
+group by year
+order by year;
