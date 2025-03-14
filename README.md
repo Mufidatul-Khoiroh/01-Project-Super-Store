@@ -1,2 +1,2 @@
-# Project-SuperStore-SQL-Excel
-Data Analysis with SQL and Excel Pivot Table
+# Project-Super Store
+Data Analysis with SQL, Excel Pivot Table, Python, and Looker Studio
